@@ -17,6 +17,7 @@ class viewPagerAdapter(private val context: Context):RecyclerView.Adapter<viewPa
         val title = itemView.findViewById<TextView>(R.id.title)
         val content = itemView.findViewById<TextView>(R.id.content)
         val image = itemView.findViewById<ImageView>(R.id.image)
+        val btm = itemView.findViewById<TextView>(R.id.btm)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): newsViewHolder {
@@ -28,6 +29,7 @@ class viewPagerAdapter(private val context: Context):RecyclerView.Adapter<viewPa
         val currentNews=allNews[position]
         holder.title.text=currentNews.title
         holder.content.text=currentNews.content
+        holder.btm.text="Click here to read full story"
         Glide.with(holder.itemView.context).load(currentNews.imageurl).into(holder.image)
     }
 

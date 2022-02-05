@@ -176,7 +176,7 @@ class ViewPagerCardTransformer() : ViewPager2.PageTransformer {
         private const val ALPHA_FACTOR = .3f
         private const val DEFAULT_ALPHA = 1f
         private const val offscreenPageLimit=3
-        private const val MIN_SCALE = 0.75f
+        private const val MIN_SCALE = 0.9f
 
     }
 
