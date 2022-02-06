@@ -35,10 +35,9 @@
         android:layout_width="match_parent"
         android:id="@+id/title"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:padding="12dp"
+        android:paddingTop="15dp"
+        android:paddingHorizontal="18dp"
         tools:text="BCCI asks cricket boards to give them money as  koh"
-        android:ellipsize="end"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#212121"
@@ -50,7 +49,9 @@
     <TextView
         android:layout_width="match_parent"
         android:id="@+id/content"
-        android:padding="12dp"
+        android:paddingHorizontal="18dp"
+        android:paddingBottom="12dp"
+        android:paddingTop="6dp"
         android:layout_height="wrap_content"
         android:textSize="13sp"
         android:textColor="@color/black"
@@ -70,12 +71,12 @@
         android:textColor="#000000"
         android:id="@+id/btm"
         android:background="#ADADAD"
-        android:padding="6dp"
+        android:padding="10dp"
         tools:text="Click here to know full story"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintLeft_toLeftOf="parent"
         card_view:layout_constraintRight_toRightOf="parent"
-        android:elevation="5dp"
+        android:elevation="10dp"
         />
 
 

@@ -1,23 +1,19 @@
 package com.example.newsfresh
 
+import android.content.Intent
 import android.net.Uri
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsIntent.Builder
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.yuyakaido.android.cardstackview.CardStackListener
-import com.yuyakaido.android.cardstackview.Direction
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity() : AppCompatActivity(), newsItemClicked, CardStackListener
+class MainActivity() : AppCompatActivity(),IviewPagerAdapter
      {
 //    private lateinit var mAdapter: newsListAdapter
     private lateinit var viewPager2Adapter: viewPagerAdapter
@@ -33,8 +29,7 @@ class MainActivity() : AppCompatActivity(), newsItemClicked, CardStackListener
 //        mAdapter= newsListAdapter(this)
 //        recyclerView.adapter=mAdapter
         viewPager2 = viewpager
-       
-        viewPager2Adapter = viewPagerAdapter(this)
+        viewPager2Adapter = viewPagerAdapter(this,this)
         fetchData()
         viewPager2.adapter=viewPager2Adapter
 
@@ -129,41 +124,22 @@ class MainActivity() : AppCompatActivity(), newsItemClicked, CardStackListener
     }
 
 
-    override fun onItemClick(item: news) {
-        val builder = Builder()
-        val customTabsIntent = builder.build()
-        customTabsIntent.launchUrl(this, Uri.parse(item.url))
-    }
 
-    override fun onCardDragging(direction: Direction?, ratio: Float) {
+         override fun onLinkClicked(news: news) {
+             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
+             startActivity(browserIntent)
+         }
 
-    }
-
-    override fun onCardSwiped(direction: Direction?) {
-
-
-    }
-
-    override fun onCardRewound() {
-
-    }
-
-    override fun onCardCanceled() {
-
-    }
-
-    override fun onCardAppeared(view: View?, position: Int) {
-
-    }
-
-    override fun onCardDisappeared(view: View?, position: Int) {
-
-    }
-
-
-
-
-}
+         override fun longPress() {
+//             val intent = Intent(Intent.ACTION_SEND)
+//             intent.type ="text/plain"
+//             intent.putExtra(Intent.EXTRA_TEXT,"Hey checkout this news ${news.title}+ \n + ${news.url}")
+//
+//             val chooser = Intent.createChooser(intent,"Share this Quickiee using....")
+//             startActivity(chooser)
+             Toast.makeText(this,"Long press hua hai bsdk", Toast.LENGTH_SHORT).show()
+         }
+     }
 class ViewPagerCardTransformer() : ViewPager2.PageTransformer {
     companion object {
 
