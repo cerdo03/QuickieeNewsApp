@@ -3,27 +3,36 @@ package com.example.newsfresh
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 
 class MainActivity() : AppCompatActivity(),IviewPagerAdapter
+
      {
 //    private lateinit var mAdapter: newsListAdapter
     private lateinit var viewPager2Adapter: viewPagerAdapter
     private lateinit var viewPager2:ViewPager2
+    lateinit var body:ArrayList<String>
+
 //    private lateinit var adapter:viewPagerAdapter
 //    private lateinit var layoutManager: CardStackLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        body= ArrayList()
+
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 //        fetchData()
 //        mAdapter= newsListAdapter(this)
@@ -31,6 +40,7 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
         viewPager2 = viewpager
         viewPager2Adapter = viewPagerAdapter(this,this)
         fetchData()
+
         viewPager2.adapter=viewPager2Adapter
 
 //        viewPager2.apply {
@@ -60,7 +70,7 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
 //                super.onPageScrollStateChanged(state)
 //            }
 //        })
-        viewPager2.offscreenPageLimit=3
+        viewPager2.offscreenPageLimit=15
         viewPager2.setPageTransformer(ViewPagerCardTransformer())
 //            layoutManager = CardStackLayoutManager(this,this).apply{
 //                setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
@@ -86,25 +96,30 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
 
 
     }
+
     private fun fetchData(){
         val url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=55f0f9f1dd6c4aaa9d33720dc1485c17"
         val jsonObjectRequest = object :JsonObjectRequest(
             Request.Method.GET, url, null,
             Response.Listener{
                 val newsJsonArray = it.getJSONArray("articles")
-                val newsArray =  ArrayList<news>()
-                for(i in 0 until newsJsonArray.length()){
+                var newsArray=ArrayList<news>()
+                for(i in 0 until newsJsonArray.length()) {
                     val newsJsonObject = newsJsonArray.getJSONObject(i)
-                    val news= news(
+//                    postRequest(newsJsonObject.getString("url"))
+                    val news = news(
                         newsJsonObject.getString("title"),
                         newsJsonObject.getString("author"),
                         newsJsonObject.getString("url"),
                         newsJsonObject.getString("urlToImage"),
-                        newsJsonObject.getString("content")
+                        "",
                     )
-                    newsArray.add(news)
+                    if(news.title!="null" && news.url!="null" && news.imageurl!="null")
+                        newsArray.add(news)
+
                 }
-                viewPager2Adapter.update(newsArray)
+                postRequest(newsArray)
+
 
             },
             Response.ErrorListener{
@@ -122,6 +137,43 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
 
     }
+         fun postRequest(newsArray:ArrayList<news>): ArrayList<news> {
+             val n=ArrayList<news>()
+             val queue: RequestQueue = Volley.newRequestQueue(this)
+             val url = "https://articlesummary.herokuapp.com/api"
+             Log.d("lund",newsArray.size.toString())
+             for(i in 0..newsArray.size-1){
+
+                 val jobject= JSONObject()
+                 jobject.put("url",newsArray.get(i).url)
+
+                 val jsonObjectRequest = object : JsonObjectRequest(
+                     Request.Method.POST,
+                     url,    jobject,
+                     Response.Listener
+                     {
+                         val responseJsonObjectData = it.getString("result")
+//                         newsArray.set(i,news(newsArray.get(i).title,newsArray.get(i).author,newsArray.get(i).url,
+//                             newsArray.get(i).imageurl,responseJsonObjectData))
+                         n.add(news(newsArray.get(i).title,newsArray.get(i).author,newsArray.get(i).url,
+                             newsArray.get(i).imageurl,responseJsonObjectData))
+                         viewPager2Adapter.update(n)
+                     },
+                     Response.ErrorListener
+                     {
+                        Log.d("randi",it.toString())
+                     }){
+                     override fun getHeaders(): MutableMap<String, String> {
+                         val head: MutableMap<String, String> = HashMap()
+                         head["Authorization"] = "cerdoboss"
+                         return head
+                     }
+                 }
+                queue.add(jsonObjectRequest)
+             }
+             return n
+
+         }
 
 
 
@@ -194,6 +246,7 @@ class ViewPagerCardTransformer() : ViewPager2.PageTransformer {
             }
         }
     }
+
 }
 
 
