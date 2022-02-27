@@ -19,5 +19,12 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
 
 </RelativeLayout>

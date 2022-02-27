@@ -1,11 +1,11 @@
 package com.example.newsfresh
 
+import android.app.ActionBar
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
@@ -23,7 +23,7 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
 //    private lateinit var mAdapter: newsListAdapter
     private lateinit var viewPager2Adapter: viewPagerAdapter
     private lateinit var viewPager2:ViewPager2
-    lateinit var body:ArrayList<String>
+
 
 //    private lateinit var adapter:viewPagerAdapter
 //    private lateinit var layoutManager: CardStackLayoutManager
@@ -31,7 +31,8 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        body= ArrayList()
+        getSupportActionBar()?.setTitle("");
+        progressBar.visibility=View.VISIBLE
 
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 //        fetchData()
@@ -157,7 +158,9 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
 //                             newsArray.get(i).imageurl,responseJsonObjectData))
                          n.add(news(newsArray.get(i).title,newsArray.get(i).author,newsArray.get(i).url,
                              newsArray.get(i).imageurl,responseJsonObjectData))
+                         progressBar.visibility=View.GONE
                          viewPager2Adapter.update(n)
+
                      },
                      Response.ErrorListener
                      {
@@ -182,15 +185,12 @@ class MainActivity() : AppCompatActivity(),IviewPagerAdapter
              startActivity(browserIntent)
          }
 
-         override fun longPress() {
-//             val intent = Intent(Intent.ACTION_SEND)
-//             intent.type ="text/plain"
-//             intent.putExtra(Intent.EXTRA_TEXT,"Hey checkout this news ${news.title}+ \n + ${news.url}")
-//
-//             val chooser = Intent.createChooser(intent,"Share this Quickiee using....")
-//             startActivity(chooser)
-             Toast.makeText(this,"Long press hua hai bsdk", Toast.LENGTH_SHORT).show()
+         override fun swiperight(news: news) {
+             TODO("Not yet implemented")
          }
+
+
+
      }
 class ViewPagerCardTransformer() : ViewPager2.PageTransformer {
     companion object {
