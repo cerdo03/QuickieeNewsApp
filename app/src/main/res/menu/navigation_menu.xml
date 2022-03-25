@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+    <item
+        android:id="@+id/explore"
+        android:title="Explore and Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        />
+
+
+    <item
+        android:id="@+id/bookmarks"
+        android:title="Bookmarks"
+        android:icon="@drawable/ic_baseline_bookmarks_24"/>
+
+    <item
+        android:id="@+id/facts"
+        android:title="Do you know?"
+        android:icon="@drawable/ic_baseline_question_answer_24"
+        />
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+
+
+
+
+</menu>

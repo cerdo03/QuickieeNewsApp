@@ -15,14 +15,23 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 
 {
     val allNews = ArrayList<news>()
-
-    inner class newsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    var onItemClick: ((news) -> Unit)? = null
+        inner class newsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val title = itemView.findViewById<TextView>(R.id.title)
         val content = itemView.findViewById<TextView>(R.id.content)
         val image = itemView.findViewById<ImageView>(R.id.image)
         val btm = itemView.findViewById<TextView>(R.id.btm)
+//        init {
+//            itemView.setOnClickListener {
+//                onItemClick?.invoke(allNews[adapterPosition])
+//            }
+//
+//        }
 
-    }
+
+
+
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): newsViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_news,parent,false)
@@ -34,10 +43,6 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         view.setOnClickListener(View.OnClickListener { view ->
             Toast.makeText(context,(allNews.size-viewHolder.adapterPosition-1).toString()+" Unread News",Toast.LENGTH_SHORT).show()
         })
-
-
-
-
 
 
         return viewHolder
@@ -73,14 +78,13 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 
 
 
-
 }
 
 
 
 interface IviewPagerAdapter{
     fun onLinkClicked(news:news)
-    fun swiperight(news:news)
+
 
 }
 
