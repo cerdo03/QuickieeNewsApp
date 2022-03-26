@@ -7,7 +7,10 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_right_24.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/ic_baseline_bookmarks_24.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1435" />
         <entry key="app/src/main/res/layout/activity_display.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.2105978260869565" />
@@ -15,6 +18,7 @@
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/styles.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/topicitem.xml" value="0.21693840579710144" />
+        <entry key="app/src/main/res/menu/bubble_menu.xml" value="0.2953125" />
         <entry key="app/src/main/res/menu/drawer_list.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

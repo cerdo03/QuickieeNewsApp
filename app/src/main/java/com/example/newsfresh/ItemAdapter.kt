@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import me.samthompson.bubbleactions.BubbleActions
 
 
 class ItemAdapter(private val context: Context, val dataset: List<topic_item>, val listener: ImageItemClicked):RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
@@ -28,12 +30,14 @@ class ItemAdapter(private val context: Context, val dataset: List<topic_item>, v
         val item = dataset[position]
         holder.imageView.setImageResource(item.getURI())
         holder.textView.text=item.getTopicName()
+
         holder.imageView.setOnClickListener{
             listener.onItemClicked(dataset[position])
         }
         holder.textView.setOnClickListener{
             listener.onItemClicked((dataset[position]))
         }
+
     }
 
     override fun getItemCount(): Int {

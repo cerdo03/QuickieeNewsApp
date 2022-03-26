@@ -3,12 +3,12 @@ package com.example.newsfresh
 import android.content.Context
 import android.util.Log
 import android.view.*
-import android.view.View.OnTouchListener
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import me.samthompson.bubbleactions.BubbleActions
 
 
 class viewPagerAdapter(private val context: Context,private val listener: IviewPagerAdapter):RecyclerView.Adapter<viewPagerAdapter.newsViewHolder>()
@@ -43,6 +43,13 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         view.setOnClickListener(View.OnClickListener { view ->
             Toast.makeText(context,(allNews.size-viewHolder.adapterPosition-1).toString()+" Unread News",Toast.LENGTH_SHORT).show()
         })
+//        view.setOnLongClickListener(object : View.OnLongClickListener {
+//            override fun onLongClick(v: View): Boolean {
+//
+//                return true
+//            }
+//        })
+
 
 
         return viewHolder
@@ -55,6 +62,7 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         holder.content.text=currentNews.content
 //         postRequest(currentNews.url,holder)
 //        postRequest(currentNews.url,holder)
+
 
         holder.btm.text="Click here to read full story"
         Glide.with(holder.itemView.context).load(currentNews.imageurl).into(holder.image)

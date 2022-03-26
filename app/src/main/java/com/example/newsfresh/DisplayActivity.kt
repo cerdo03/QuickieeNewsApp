@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -112,11 +113,13 @@ class DisplayActivity() : AppCompatActivity(),IviewPagerAdapter
 
 
     }
+
+
+
     fun openExp() {
         val intent = Intent(this,MainActivity2::class.java)
         startActivityForResult(intent,0)
     }
-
 
 
 
@@ -213,12 +216,15 @@ class DisplayActivity() : AppCompatActivity(),IviewPagerAdapter
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
         startActivity(browserIntent)
     }
+    }
 
 
 
 
 
-}
+
+
+
 class ViewPagerCardTransformer() : ViewPager2.PageTransformer {
     companion object {
 
