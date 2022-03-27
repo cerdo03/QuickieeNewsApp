@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,7 +18,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
 
     <ImageView
         android:id="@+id/image"
@@ -80,10 +83,25 @@
         card_view:layout_constraintRight_toRightOf="parent"
         android:elevation="10dp"
         />
+    <io.github.yavski.fabspeeddial.FabSpeedDial
+        card_view:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="7dp"
+        card_view:layout_constraintBottom_toTopOf="@id/btm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        card_view:fabGravity="bottom_end"
+        card_view:fabMenu="@menu/bubble_menu"
+        card_view:fabBackgroundTint="?attr/colorPrimary"
+        card_view:miniFabBackgroundTint="@android:color/white"
+        card_view:miniFabDrawableTint="?attr/colorPrimaryDark"
+        card_view:miniFabTitleTextColor="?attr/colorPrimaryDark" />
+
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
 
 </LinearLayout>

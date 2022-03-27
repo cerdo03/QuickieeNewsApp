@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import me.samthompson.bubbleactions.BubbleActions
 
 
 class ItemAdapter(private val context: Context, val dataset: List<topic_item>, val listener: ImageItemClicked):RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){

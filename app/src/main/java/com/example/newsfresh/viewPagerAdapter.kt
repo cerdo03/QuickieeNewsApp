@@ -1,14 +1,12 @@
 package com.example.newsfresh
 
 import android.content.Context
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import me.samthompson.bubbleactions.BubbleActions
 
 
 class viewPagerAdapter(private val context: Context,private val listener: IviewPagerAdapter):RecyclerView.Adapter<viewPagerAdapter.newsViewHolder>()
@@ -20,7 +18,9 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         val title = itemView.findViewById<TextView>(R.id.title)
         val content = itemView.findViewById<TextView>(R.id.content)
         val image = itemView.findViewById<ImageView>(R.id.image)
+//        val menu = itemView.findViewById<com.michaldrabik.tapbarmenulib.TapBarMenu>(R.id.tapBarMenu)
         val btm = itemView.findViewById<TextView>(R.id.btm)
+
 //        init {
 //            itemView.setOnClickListener {
 //                onItemClick?.invoke(allNews[adapterPosition])
@@ -49,7 +49,12 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 //                return true
 //            }
 //        })
-
+//        viewHolder.menu.setOnClickListener(object : View.OnClickListener {
+//             override fun onClick(v: View?) {
+//                viewHolder.menu.toggle()
+//            }
+//        })
+//
 
 
         return viewHolder
@@ -72,9 +77,13 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         return allNews.size
     }
     fun update(newList: ArrayList<news>){
-        allNews.clear()
+//        allNews.clear()
+        var size =  allNews.size
+        for(i in size until newList.size){
+            allNews.add(newList[i])
+        }
 
-        allNews.addAll(newList)
+//        allNews.addAll(newList)
         notifyDataSetChanged()
     }
     fun preprocess(str:String): String {

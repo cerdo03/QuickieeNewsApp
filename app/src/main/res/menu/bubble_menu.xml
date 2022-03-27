@@ -2,13 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/call"
-        android:orderInCategory="100"
-        android:title="ahufha"
-        app:showAsAction="always" />
+        android:id="@+id/action_call"
+        android:icon="@drawable/ic_baseline_bookmark_24"
+        android:title="bookmark" />
     <item
-        android:id="@+id/sms"
-        android:orderInCategory="100"
-        android:title="afb"
-        app:showAsAction="always" />
+        android:id="@+id/action_text"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="Share"/>
+
 </menu>
