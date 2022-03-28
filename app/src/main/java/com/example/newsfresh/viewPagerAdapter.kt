@@ -1,24 +1,32 @@
 package com.example.newsfresh
 
 import android.content.Context
+import android.content.Intent
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.internal.NavigationMenu
+
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter
+
+
+
 
 
 class viewPagerAdapter(private val context: Context,private val listener: IviewPagerAdapter):RecyclerView.Adapter<viewPagerAdapter.newsViewHolder>()
 
 {
     val allNews = ArrayList<news>()
+    val map = hashMapOf<news,Boolean>()
     var onItemClick: ((news) -> Unit)? = null
         inner class newsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val title = itemView.findViewById<TextView>(R.id.title)
         val content = itemView.findViewById<TextView>(R.id.content)
         val image = itemView.findViewById<ImageView>(R.id.image)
-//        val menu = itemView.findViewById<com.michaldrabik.tapbarmenulib.TapBarMenu>(R.id.tapBarMenu)
+        val menu = itemView.findViewById<io.github.yavski.fabspeeddial.FabSpeedDial>(R.id.menu)
         val btm = itemView.findViewById<TextView>(R.id.btm)
 
 //        init {
@@ -57,6 +65,18 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 //
 
 
+        viewHolder.menu.setMenuListener(object : SimpleMenuListenerAdapter() {
+
+            override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
+                if(menuItem.toString()=="Share"){
+                    listener.shareNews(allNews[viewHolder.adapterPosition])
+                }
+                return super.onMenuItemSelected(menuItem)
+            }
+
+        })
+
+
         return viewHolder
     }
 
@@ -67,6 +87,7 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         holder.content.text=currentNews.content
 //         postRequest(currentNews.url,holder)
 //        postRequest(currentNews.url,holder)
+
 
 
         holder.btm.text="Click here to read full story"
@@ -81,6 +102,7 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         var size =  allNews.size
         for(i in size until newList.size){
             allNews.add(newList[i])
+            map[newList[i]] = false
         }
 
 //        allNews.addAll(newList)
@@ -95,12 +117,14 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 
 
 
+
 }
 
 
 
 interface IviewPagerAdapter{
     fun onLinkClicked(news:news)
+    fun shareNews(news:news)
 
 
 }

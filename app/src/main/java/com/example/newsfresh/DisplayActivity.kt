@@ -154,6 +154,8 @@ class DisplayActivity() : AppCompatActivity(),IviewPagerAdapter
                 postRequest(newsArray)
 
 
+
+
             },
             Response.ErrorListener{
             }
@@ -216,7 +218,15 @@ class DisplayActivity() : AppCompatActivity(),IviewPagerAdapter
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(news.url))
         startActivity(browserIntent)
     }
+
+    override fun shareNews(news: news) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type ="text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT,"Hey checkout this news  \n ${news.url}")
+        val chooser = Intent.createChooser(intent,"Share this news using....")
+        startActivity(chooser)
     }
+}
 
 
 

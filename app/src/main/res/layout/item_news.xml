@@ -85,7 +85,8 @@
         />
     <io.github.yavski.fabspeeddial.FabSpeedDial
         card_view:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="7dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/menu"
         card_view:layout_constraintBottom_toTopOf="@id/btm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
