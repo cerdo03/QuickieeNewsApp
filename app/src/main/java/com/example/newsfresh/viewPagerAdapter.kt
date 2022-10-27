@@ -3,6 +3,7 @@ package com.example.newsfresh
 import android.content.Context
 import android.content.Intent
 import android.view.*
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,12 +23,33 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
     val allNews = ArrayList<news>()
     val map = hashMapOf<news,Boolean>()
     var onItemClick: ((news) -> Unit)? = null
-        inner class newsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class newsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
+//        , View.OnClickListener,View.OnLongClickListener
+    {
         val title = itemView.findViewById<TextView>(R.id.title)
         val content = itemView.findViewById<TextView>(R.id.content)
         val image = itemView.findViewById<ImageView>(R.id.image)
-        val menu = itemView.findViewById<io.github.yavski.fabspeeddial.FabSpeedDial>(R.id.menu)
-        val btm = itemView.findViewById<TextView>(R.id.btm)
+//        val menu = itemView.findViewById<io.github.yavski.fabspeeddial.FabSpeedDial>(R.id.menu)
+        val btm = itemView.findViewById<Button>(R.id.btm)
+        val shareButton = itemView.findViewById<Button>(R.id.shareButton)
+//        override fun onClick(v: View?) {
+//
+//            menu.setMenuListener(object : SimpleMenuListenerAdapter() {
+//
+//                override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
+//                    if(menuItem.toString()=="Share"){
+//                        listener.shareNews(allNews[adapterPosition])
+//                    }
+//                    return super.onMenuItemSelected(menuItem)
+//                }
+//
+//            })
+//        }
+//
+//        override fun onLongClick(v: View?): Boolean {
+//            Toast.makeText(context,"lono",Toast.LENGTH_SHORT).show()
+//            return true
+//        }
 
 //        init {
 //            itemView.setOnClickListener {
@@ -51,6 +73,12 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         view.setOnClickListener(View.OnClickListener { view ->
             Toast.makeText(context,(allNews.size-viewHolder.adapterPosition-1).toString()+" Unread News",Toast.LENGTH_SHORT).show()
         })
+        viewHolder.shareButton.setOnClickListener{
+            listener.shareNews(allNews[viewHolder.adapterPosition])
+        }
+
+
+
 //        view.setOnLongClickListener(object : View.OnLongClickListener {
 //            override fun onLongClick(v: View): Boolean {
 //
@@ -65,16 +93,16 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 //
 
 
-        viewHolder.menu.setMenuListener(object : SimpleMenuListenerAdapter() {
-
-            override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
-                if(menuItem.toString()=="Share"){
-                    listener.shareNews(allNews[viewHolder.adapterPosition])
-                }
-                return super.onMenuItemSelected(menuItem)
-            }
-
-        })
+//        viewHolder.menu.setMenuListener(object : SimpleMenuListenerAdapter() {
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
+//                if(menuItem.toString()=="Share"){
+//                    listener.shareNews(allNews[viewHolder.adapterPosition])
+//                }
+//                return super.onMenuItemSelected(menuItem)
+//            }
+//
+//        })
 
 
         return viewHolder
@@ -87,10 +115,24 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
         holder.content.text=currentNews.content
 //         postRequest(currentNews.url,holder)
 //        postRequest(currentNews.url,holder)
+//        if(menuOpen) holder.menu.openMenu()
+//        else holder.menu.closeMenu()
+//        if(holder.menu.isMenuOpen){
+//            menuOpen=true
+//        }
+//        else menuOpen=false
+//        holder.menu.setMenuListener(object : SimpleMenuListenerAdapter() {
+//
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem?): Boolean {
+//                if(menuItem.toString()=="Share"){
+//                    listener.shareNews(allNews[holder.adapterPosition])
+//                }
+//                return super.onMenuItemSelected(menuItem)
+//            }
+//
+//        })
 
-
-
-        holder.btm.text="Click here to read full story"
         Glide.with(holder.itemView.context).load(currentNews.imageurl).into(holder.image)
     }
 
@@ -125,7 +167,6 @@ class viewPagerAdapter(private val context: Context,private val listener: IviewP
 interface IviewPagerAdapter{
     fun onLinkClicked(news:news)
     fun shareNews(news:news)
-
 
 }
 
